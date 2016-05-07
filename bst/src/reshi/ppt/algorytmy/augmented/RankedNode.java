@@ -12,40 +12,42 @@ public class RankedNode<Key extends Comparable<Key>, Value> extends BSTNode<Key,
      * Satisfies x.size == x.left.size + x.right.size + 1
      * [null].size = 0.
      */
-    RankedNodeValue value;
-//    RankedNode<Key, Value> left;
-//    RankedNode<Key, Value> right;
-//    RankedNode<Key, Value> parent;
+    public int size;
 
     public RankedNode(Key key, Value value) {
         super(key, value);
-        this.key = key;
-        this.value = new RankedNodeValue(value);
+        size = 1;
     }
 
     public void elementAdded() {
-        value.size++;
+        RankedNode tmp = this;
+        while(tmp!=null) {
+            tmp.size++;
+            tmp = tmp.getParent();
+        }
     }
 
     public void elementRemoved() {
-        value.size--;
+        RankedNode tmp = this;
+        while(tmp != null) {
+            tmp.size--;
+            tmp = tmp.getParent();
+        }
     }
 
+
+    public RankedNode<Key, Value> getLeft() {
+        return (RankedNode<Key, Value>) left;
+    }
+    public RankedNode<Key, Value> getRight() {
+        return (RankedNode<Key, Value>) right;
+    }
+    public RankedNode<Key, Value> getParent() {
+        return (RankedNode<Key, Value>) parent;
+    }
     @Override
     public String toString() {
-        return "{" + key + ": " + value.actual.toString() + ", size: " + value.size +"}";
+        return "{" + key + ": " + value.toString() + ", size: " + size +"}";
     }
 
-    private class RankedNodeValue {
-        Value actual;
-        int size;
-        Value getActual() {
-            return this.actual;
-        }
-        public RankedNodeValue(Value value) {
-            this.actual = value;
-            this.size = 0;
-        }
-
-    }
 }

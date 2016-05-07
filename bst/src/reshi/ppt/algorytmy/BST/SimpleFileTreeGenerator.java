@@ -89,7 +89,7 @@ public class SimpleFileTreeGenerator {
     }
 
     /**
-     * Execute a single 0-ary operation
+     * Execute a single operation without arguments
      * @param operation operation to execute.
      */
     private void execute(String operation) {

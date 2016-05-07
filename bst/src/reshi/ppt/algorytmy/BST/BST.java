@@ -4,14 +4,16 @@ package reshi.ppt.algorytmy.BST;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 /**
  * @author Marcin Regulski on 25.04.2016.
  */
-public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> {
-    private BSTNode<K, V> root;
+//public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> {
+public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
+    protected BSTNode<K, V> root;
     protected int size;
 
     /**
@@ -50,8 +52,12 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> 
             root = node;
         }
         else {
-            insert(node, root, (x)->{});
+            insert(node, root);
         }
+    }
+
+    public void insert(Map<K, V> pairs) {
+        pairs.forEach(this::insert);
     }
 
     /**
@@ -59,15 +65,14 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> 
      * @param node node to be inserted
      * @param subtree root of a subtree to insert the node into.
      */
-    protected void insert(BSTNode<K, V> node, BSTNode<K, V> subtree, Consumer<BSTNode<K, V>> preInsert) {
-        preInsert.accept(subtree);
+    protected void insert(BSTNode<K, V> node, BSTNode<K, V> subtree) {
         if(node.getKey().compareTo(subtree.getKey()) > 0) {
             if(subtree.right == null) {
                 subtree.right = node;
                 node.parent = subtree;
             }
             else {
-                insert(node, subtree.right, preInsert);
+                insert(node, subtree.right);
             }
         }
         else if (node.getKey().compareTo(subtree.getKey()) < 0) {
@@ -76,7 +81,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> 
                 node.parent = subtree;
             }
             else {
-                insert(node, subtree.left, preInsert);
+                insert(node, subtree.left);
             }
         }
         else {
@@ -87,21 +92,16 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> 
     /**
      * Remove a specific node from the tree.
      * @param node node to be removed
+     * @return the deleted node
      */
-    public void delete(BSTNode<K, V> node) {
+    public BSTNode<K, V> delete(BSTNode<K, V> node) {
         if(node == null) {
-            return;
+            return null;
         }
-        // node has no children: only remove node.
-        // y <- node, x <- null
+        // y - node that is actually deleted
+        // same as node, unless node has 2 children - then node's successor is removed
+        // and its data overwrites node's
 
-        // node has 1 child: bind it's child to parent's appropriate side
-        // y <- node, x = child, x.parent <- node.parent
-
-        // 2 children:
-        // y <- succ(node), x <- y.child
-        //      y has 1+ children: bind x to y's parent
-        //      y has no children: x null
         BSTNode<K, V> x, y;
         y = (node.left == null || node.right == null) ? node : successor(node);
         x = (y.left != null) ? y.left : y.right;
@@ -122,6 +122,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> 
             node.setValue(y.getValue());
         }
         this.size--;
+        return y;
     }
 
     /**
@@ -135,8 +136,8 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> 
 
     /**
      * Find element by key under a specified node.
-     * @param key - key to find
-     * @param subtree - where to look
+     * @param key key to find
+     * @param subtree where to look
      * @return node matching the key or null if such node cannot be found
      */
     public BSTNode<K, V> searchInSubtree(K key, BSTNode<K, V> subtree) {

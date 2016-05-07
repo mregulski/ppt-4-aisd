@@ -9,7 +9,7 @@ public class Main {
         SimpleFileTreeGenerator gen;
         System.out.println(System.getProperty("user.dir"));
         try {
-            gen = new SimpleFileTreeGenerator("bst\\input.txt");
+            gen = new SimpleFileTreeGenerator("input.txt");
             gen.generate();
         }
         catch(IOException ioe) {

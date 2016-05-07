@@ -8,11 +8,26 @@ public class BSTNode<Key extends Comparable<Key>, Value> {
     protected Key key;
     protected Value value;
 
-    public BSTNode<Key, Value> parent;
-    public BSTNode<Key, Value> left;
-    public BSTNode<Key, Value> right;
+    protected BSTNode<Key, Value> parent;
+    protected BSTNode<Key, Value> left;
+    protected BSTNode<Key, Value> right;
 
+    public BSTNode(Key key, Value value) {
+        this.key = key;
+        this.value = value;
+    }
 
+    public BSTNode<Key, Value> getParent() {
+        return parent;
+    }
+
+    public BSTNode<Key, Value> getLeft() {
+        return left;
+    }
+
+    public BSTNode<Key, Value> getRight() {
+        return right;
+    }
     public Key getKey() {
         return key;
     }
@@ -20,17 +35,26 @@ public class BSTNode<Key extends Comparable<Key>, Value> {
         return value;
     }
 
+    public void setParent(BSTNode<Key, Value> parent) {
+        this.parent = parent;
+    }
+
+    public void setLeft(BSTNode<Key, Value> left) {
+        this.left = left;
+    }
+
+    public void setRight(BSTNode<Key, Value> right) {
+        this.right = right;
+    }
+
     public void setValue(Value value) {
         this.value = value;
     }
-    void setKey(Key key) {
+    public void setKey(Key key) {
         this.key = key;
     }
-    protected BSTNode() {}
-    public BSTNode(Key key, Value value) {
-        this.key = key;
-        this.value = value;
-    }
+
+
 
     @Override
     public String toString() {
@@ -48,10 +72,12 @@ public class BSTNode<Key extends Comparable<Key>, Value> {
 
         System.out.println(prefix + (isTail ? "└──" : "├──") + this.toString());
         if(this.left != null) {
-             this.left.prettyPrint(prefix + (isTail ? "    " : "|    "), false);
+            this.left.prettyPrint(prefix + (isTail ? "    " : "|    "), false);
         }
         if(this.right != null) {
             this.right.prettyPrint(prefix + (isTail ? "    " : "|    "), true);
         }
     }
+
+
 }
