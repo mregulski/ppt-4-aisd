@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -c -O1
+CFLAGS = -Wall -c -O1 -lm
 OBJDIR = bin
 SRCDIR = src
 OBJS = $(addprefix $(OBJDIR)/, test.o util.o insertSort.o mergeSort.o\
@@ -10,7 +10,7 @@ all: sort
 debug: CFLAGS += -g
 debug: clean sort
 sort: $(OBJS)
-	gcc $(OBJS) -o $(OBJDIR)/sort
+	gcc $(OBJS) -lm -o $(OBJDIR)/sort
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	$(CC) $(CFLAGS) $< -c -o $@

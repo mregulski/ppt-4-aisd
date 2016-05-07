@@ -2,9 +2,10 @@
 import random
 import argparse
 import sys
-
+import math
 logging = 0
 cmps = 0
+
 
 def comparison():
     global cmps
@@ -14,7 +15,7 @@ def comparison():
 
 def partition(array, start=0, end=-1, depth=0):
     if(end == -1):
-        end=len(array)-1
+        end = len(array)-1
 
     pivot = array[random.randrange(start, end+1)]
     if logging >= 5:
@@ -67,8 +68,10 @@ def random_select(array, k, start=0, end=-1, depth=0):
 
 def select(array, k, depth=0):
     global logging
-    if(len(array) <= 10):
+    if(len(array) <= 5):
         array.sort()
+        # print('array:', array)
+        # print("k:", k)
         return(array[k-1])
 
     fives = [array[i:i+5] for i in range(0, len(array), 5)]
@@ -80,17 +83,22 @@ def select(array, k, depth=0):
             i += 1
 
     x = []
-    for i in range(len(array)//5):
-        x.append(select(fives[i], 3))
+    ceil = math.ceil(len(array)/5)
+    # print("ceil: ", ceil)
+    # print("lenfives:" ,len(fives))
+    for i in range(ceil):
+        m_idx = math.ceil(len(fives[i])/2);
+        # print("m_idx:", m_idx)
+        x.append(select(fives[i], m_idx))
 
     if(logging >= 1):
         print("{}medians:".format(" "*depth), x)
 
-    M = select(x, len(array)//10, depth+1)
+    M = select(x, math.ceil(len(x)/2), depth+1)
 
     if(logging >= 1):
         print("{}Median-of-medians:".format(" "*depth), M)
-    P1,P2,P3 = [],[],[]
+    P1, P2, P3 = [], [], []
     for val in array:
         if (comparison() and val < M):
             P1.append(val)

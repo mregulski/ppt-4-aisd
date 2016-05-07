@@ -1,5 +1,6 @@
 #include "util.h"
 #include "sort.h"
+#include "math.h"
 
 Result *radix_sort(long *arr, long len, int base, int logging)
 {
@@ -14,6 +15,19 @@ Result *radix_sort(long *arr, long len, int base, int logging)
             max = array[i];
     }
 
+    if(base == 1) {    //select optimal
+        // printf("max: %d\n", max);
+        // printf("0s: %d\n", __builtin_clrsbl(max));
+        int bitlen = sizeof(long)*8 - __builtin_clrsbl(len); // long - leading 0s
+        printf("bitlen: %d\n", bitlen);
+        if(bitlen < log2(len)) {
+            base = bitlen;
+        }
+        else {
+            base = log2(len);
+        }
+    }
+    // printf("base: %d\n", base);
     for(int exp = 1; max/exp > 0; exp *= base)
     {
         if(logging > 1) {

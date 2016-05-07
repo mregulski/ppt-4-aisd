@@ -8,8 +8,8 @@
 #include <errno.h>
 #define N_SORTS 8
 // generators
-long *generate_list(OrderingE type, long size, int logging);
-long *generate_list_random(long size);
+long *generate_list(OrderingE type, long size, long max, int logging);
+long *generate_list_random(long size, long max);
 long *generate_list_ascending(long size);
 long *generate_list_descending(long size);
 
@@ -29,7 +29,7 @@ struct sort {
 
 // main test method
 void test(long test_size, int logging, OrderingE list_type, int qi_threshold,
-    int qm_threshold, int radix, struct sort conf[]);
+    int qm_threshold, int radix, long max, struct sort conf[]);
 
 
 
@@ -171,7 +171,7 @@ int main(int argc, char **argv)
     // run test
     for(int TEST_NO = 0; TEST_NO < TESTS; TEST_NO++)
     {
-        test(test_size, logging, list_type, qi_threshold, mi_threshold, radix, conf);
+        test(test_size, logging, list_type, qi_threshold, mi_threshold, radix, qi_threshold, conf);
     }
 
 }
@@ -179,9 +179,10 @@ int main(int argc, char **argv)
 // cut-off value for printing sorted arrays
 #define MAX_OUTPUT_ARRAY 32
 void test(long test_size, int logging, OrderingE list_type, int qi_threshold,
-    int mi_threshold, int base, struct sort conf[])
+    int mi_threshold, int base, long max, struct sort conf[])
 {
-    long *arr = generate_list(list_type, test_size, logging);
+    // qi as max
+    long *arr = generate_list(list_type, test_size, qi_threshold, logging);
     if(logging > 0)
     {
         print_array("Generated array:", arr, test_size, NO_SPECIAL);
@@ -390,7 +391,7 @@ void test(long test_size, int logging, OrderingE list_type, int qi_threshold,
             }
         }
         fprintf(out, "radix (%5d):\t", base);
-        puts("");
+        // puts("");    
         start = clock();
         Result *radix = radix_sort(arr, test_size, base, logging);
         stop = clock();
@@ -408,15 +409,15 @@ void test(long test_size, int logging, OrderingE list_type, int qi_threshold,
 }
 
 // Generators
-long *generate_list_random(long size)
+long *generate_list_random(long size, long max)
 {
     long *arr = malloc(sizeof(long) * size);
     for(long i = 0; i < size; i++)
     {
         if(rand()%512 > 255)
-            arr[i] = rand()%(size*2);
+            arr[i] = rand()%(max+1);
         else
-            arr[i] = rand()%(size*2);
+            arr[i] = rand()%(max+1);
     }
     return arr;
 }
@@ -441,7 +442,7 @@ long *generate_list_descending(long size)
     return arr;
 }
 
-long *generate_list(OrderingE list_type, long test_size, int logging) {
+long *generate_list(OrderingE list_type, long test_size, long max, int logging) {
     long *arr = NULL;
     switch (list_type)
     {
@@ -460,7 +461,7 @@ long *generate_list(OrderingE list_type, long test_size, int logging) {
             }
             break;
         case Random:
-            arr = generate_list_random(test_size);
+            arr = generate_list_random(test_size, max);
             if(logging > 1)
             {
                 printf("Generating random list of size %ld.\n", test_size);
