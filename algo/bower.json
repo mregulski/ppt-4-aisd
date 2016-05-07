@@ -1,0 +1,24 @@
+{
+  "name": "algo",
+  "authors": [
+    "Marcin Regulski <maarcin.regulski@gmail.com>"
+  ],
+  "description": "algorithm information with visualisation",
+  "main": "mergeSort.html",
+  "moduleType": [
+    "globals"
+  ],
+  "license": "none",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+],
+"dependencies" : {
+    "HTML5-Reset": ">=2.1"
+}
+}

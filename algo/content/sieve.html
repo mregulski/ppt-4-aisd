@@ -1,0 +1,22 @@
+<h2>Sito Erastotenesa</h2>
+<p><b>Sito Eratostenesa</b> - przypisywany Eratostenesowi z Cyreny algorytm wyznaczania liczb pierwszych z zadanego przedziału [2, n] </p>
+<p>Ze zbioru licz naturalnych z przedziału [2, n], tj. {2, 3, 4, ..., n}, wybieramy najmniejszą, czyli 2, i wykreślamy wszystkie jej wielokrotności większe od niej samej, to jest 4, 6, 8, ...</p>
+<p>Z pozostałych liczb wybieramy najmniejszą niewykreśloną liczbę (3) i usuwamy wszystkie jej wielokrotności większe od niej samej: 6, 9, 12, ..., przy czym nie przejmujemy się że niektóre liczby (np. 6 czy 12) będą skreślane więcej niż raz.</p>
+<h3>Pseudo-kod</h3>
+<code>Wejście: liczba całkowita n > 1
+
+    Niech A będzie tablicą typów logicznych indeksowaną liczbami całkowitymi od 2 do n
+    początkowo wypełniona wartościami true
+
+    for i := 2, 3, 4, ..., nie więcej niż sqrt(n):
+    if A[i] = true:
+    for j := 2i, 3i, 4i, ..., nie więcej niż n:
+    A[j] := false
+
+    Wyjście: wartości i takie, że A[i] zawiera wartość true.</code>
+<h3>Przykładowe działanie</h3>
+<label for="size">Size</label>
+<input type="number" name="size" id="n-size" value="100">
+<div id="example"></div>
+
+<!-- <script src="sito.js" type="text/javascript" charset="utf-8"></script> -->

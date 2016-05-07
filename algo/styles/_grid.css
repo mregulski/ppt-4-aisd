@@ -1,0 +1,35 @@
+/*
+Happy griding with 6-grid with gutters 1.6% width done as right margins.
+You may use padding and border for col-?-6 class.
+Do not change width or margin atributes.
+JCI * 2016
+*/
+.row:after {
+  content: "";
+  display: block;
+  clear: both;
+  height: 0;
+  visibility: hidden; }
+
+[class*='col-'] {
+  float: left;
+  width: 100%;
+  min-height: 1px; }
+
+@media screen and (min-width: 800px) {
+  [class*='col-'] {
+    margin-right: 1.6%; }
+  [class*='col-']:last-of-type {
+    margin-right: 0; }
+  .col-1-6 {
+    width: 15.3333%; }
+  .col-2-6 {
+    width: 32.2667%; }
+  .col-3-6 {
+    width: 49.2%; }
+  .col-4-6 {
+    width: 66.1333%; }
+  .col-5-6 {
+    width: 83.0667%; }
+  .col-6-6 {
+    width: 100.000%; } }

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=content-width, initial-scale=1" />
+	<title>Sortowanie przez wstawianie</title>
+	<link rel="stylesheet" href="styles/reset.css"/>
+	<link rel="stylesheet" href="styles/grid.css"/>
+	<link rel="stylesheet" href="styles/algorytm.css"/>
+	<script src="scripts/menu.js"></script>
+	<script src="scripts/mergeSort.js"></script>
+</head>
+<body>
+
+<header>
+	<div class="row space-after">
+		<div class="col-1-6">
+			<img id="logo" src="res/infppt.png" alt="logo wydziału"/>
+		</div>
+		<div class="col-5-6">
+			<h1>Podstawowe algorytmy</h1>
+		</div>
+	</div>
+	<p class="space-after">Na stronach tych omówione są najciekawsze algorytmy omawiane na wykładzie ze Wstępu do Informatyki
+	na pierwszym roku studiów informatycznych na Wydziale PPT PWr.</p>
+</header>
+<div id="menuToggle">&#9776; Menu</div>
+<div class="row">
+	<div class="col-2-6">
+		<nav id="menu">
+			<ul>
+				<li class="algorytm">
+					<a href="#">Algorytm Euklidesa</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Rozszerzony Algorytm Euklidesa</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Test pierwszości</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Sito Erastotenesa</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Sortowanie przez wstawianie</a>
+				</li>
+				<li class="algorytm">
+					<a href="#" class="active">Sortowanie przez scalanie</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Wyszukiwanie binarne</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Problem wież z Hanoi</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Problem Hetmanów</a>
+				</li>
+				<li class="algorytm">
+					<a href="#">Problem skoczka szachowego</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="col-4-6">
+		<article>
+			<h2>Sortowanie przez scalanie</h2>
+			<p>Rekurencyjny algorytm sortowania wykorzystujący metodę dziel i zwyciężaj.</p>
+			<h3>Schemat działania</h3>
+			<ol>
+				<li>Podziel zestaw danych na dwie równe części.</li>
+				<li>Posortuj każdą część przez scalanie, chyba że został tylko jeden element.</li>
+				<li>Połącz posortowane podciągi w jeden.</li>
+			</ol>
+			<section>
+				<h3>Pseudo-kod funkcji:</h3>
+				<div class="row">
+				<pre class="col-3-6">
+					<code>
+<span class="comment">// posortuj Array[start...end]</span>
+mergeSort(Array):
+	if Array.length > 1:
+		center = Array.length / 2
+		left = Array[0..center]
+		right = Array[center+1.. Array.length-1]
+		mergeSort(left)
+		mergeSort(right)
+		merge(left, right)
+					</code>
+				</pre>
+				<pre class="col-3-6">
+					<code>
+<span class="comment">// scal left z right</span>
+merge(left, right):
+	result = empty list;
+	while(left.length &gt; 0 and right.length &gt; 0)
+		if(left.first &lt;= right.first)
+			result.append(left.first)
+			left = left[1..]
+		else
+			result.append(right.first)
+			right = right[1..]
+	<span class="comment">// jedna jest już pusta</span>
+	while(left.length &gt; 0)
+		result.append(left.first)
+		left = left[1..]
+	while(right.length &gt; 0)
+		result.append(right.first)
+		right = right[1..]
+	return result
+					</code>
+				</pre>
+			</div>
+			</section>
+		</article>
+		<div id="simulator">
+			<h3>Przykład działania</h3>
+			<p>Wprowadź dane do posortowania oddzielone przecinkami</p>
+			<input type="text" placeholder="dane do sortowania" id="array"/>
+			<button id="runButton" name="run" disabled>Sortuj</button>
+			<div id="output">
+			</div>
+		</div>
+	</div>
+</div>
+<footer>
+	<p>Copyryght &copy; 2016 WPPT PWr</p>
+</footer>
+</body>
+</html>

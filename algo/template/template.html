@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="width=content-width, initial-scale=1" />
+	<title>{{Title}}</title>
+	<link href='https://fonts.googleapis.com/css?family=Lato:400,900,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="styles/styles.css"/>
+	<!-- <link rel="stylesheet" href="http://basehold.it/24"> -->
+	<link rel="apple-touch-icon" sizes="57x57" href="res/apple-icon-57x57.png"/>
+	<link rel="apple-touch-icon" sizes="60x60" href="res/apple-icon-60x60.png"/>
+	<link rel="apple-touch-icon" sizes="72x72" href="res/apple-icon-72x72.png"/>
+	<link rel="apple-touch-icon" sizes="76x76" href="res/apple-icon-76x76.png"/>
+	<link rel="apple-touch-icon" sizes="114x114" href="res/apple-icon-114x114.png"/>
+	<link rel="apple-touch-icon" sizes="120x120" href="res/apple-icon-120x120.png"/>
+	<link rel="apple-touch-icon" sizes="144x144" href="res/apple-icon-144x144.png"/>
+	<link rel="apple-touch-icon" sizes="152x152" href="res/apple-icon-152x152.png"/>
+	<link rel="apple-touch-icon" sizes="180x180" href="res/apple-icon-180x180.png"/>
+	<link rel="icon" type="image/png" sizes="192x192"  href="res/android-icon-192x192.png"/>
+	<link rel="icon" type="image/png" sizes="32x32" href="res/favicon-32x32.png"/>
+	<link rel="icon" type="image/png" sizes="96x96" href="res/favicon-96x96.png"/>
+	<link rel="icon" type="image/png" sizes="16x16" href="res/favicon-16x16.png"/>
+	<link rel="manifest" href="res/manifest.json"/>
+	<meta name="msapplication-TileColor" content="#ffffff"/>
+	<meta name="msapplication-TileImage" content="res/ms-icon-144x144.png"/>
+	<meta name="theme-color" content="#ffffff"/>
+	{{Styles}}
+	<script src="scripts/menu.js"></script>
+	{{Scripts}}
+</head>
+<body>
+<div id="wrapper">
+	<header>
+		<div class="row space-after">
+			<div id="logo">
+				<img src="res/infppt.png" alt="logo wydziału"/>
+
+				<h1>Podstawowe algorytmy</h1>
+			</div>
+		</div>
+		<p class="space-after">Na tych stronach omówione są najciekawsze algorytmy omawiane na wykładzie ze Wstępu do Informatyki
+		na pierwszym roku studiów informatycznych na Wydziale PPT PWr.</p>
+	</header>
+	<div id="menuToggle">&#9776; Menu</div>
+	<div class="row">
+	    <div class="col-2-6">
+	        <nav id="menu">
+	            {{MenuItems}}
+	        </nav>
+	    </div>
+	    <div class="col-4-6">
+	        {{PageContent}}
+	    </div>
+	</div>
+	<footer>
+		<p>Copyryght &copy; 2016 WPPT PWr</p>
+	</footer>
+</div>
+</body>
+</html>

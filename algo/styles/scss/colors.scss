@@ -1,0 +1,34 @@
+// SASS style sheet */
+// Palette color codes */
+// Palette URL: http://paletton.com/#uid=708120kpXrSa1M9a1M9HQbTHQbT */
+
+// Feel free to copy&paste color codes to your application */
+
+
+// As hex codes */
+
+$color-primary-0: #DE492A;	// Main Primary color */
+$color-primary-1: #FFBDAF;
+$color-primary-2: #5F1000;
+
+$color-secondary-1-0: #DEB12A;	// Main Secondary color (1) */
+$color-secondary-1-1: #FFEBAF;
+$color-secondary-1-2: #5F4700;
+
+$color-secondary-2-0: #30309B;	// Main Secondary color (2) */
+$color-secondary-2-1: #A1A1DB;
+$color-secondary-2-2: #060642;
+
+$color-complement-0: #1EA14F;	// Main Complement color */
+$color-complement-1: #99DFB3;
+$color-complement-2: #00451A;
+
+// bind colors to names
+$highlight: $color-primary-0;
+$txt_base: #222;
+$bg_base: $color-secondary-2-2;
+$bg_secondary: lighten($color-secondary-1-1, 20%);
+$bg_content: $bg_secondary;
+$bg_header: $color-secondary-1-0;
+$bg_nav: $color-secondary-1-0;
+$txt_light: #eee;
