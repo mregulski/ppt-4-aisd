@@ -93,7 +93,7 @@ public class SimpleFileTreeGenerator {
      * @param operation operation to execute.
      */
     private void execute(String operation) {
-        BSTNode<Integer, Integer> tmp;
+        BinaryTreeNode<Integer, Integer> tmp;
         switch(operation) {
             case "min":
                 tmp = tree.minimum();

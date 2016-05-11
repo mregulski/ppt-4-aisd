@@ -11,9 +11,8 @@ import java.util.function.Function;
 /**
  * @author Marcin Regulski on 25.04.2016.
  */
-//public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K, V>> {
-public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
-    protected BSTNode<K, V> root;
+public class BST<K extends Comparable<K>, V> implements Iterable<BinaryTreeNode<K,V>> {
+    protected BinaryTreeNode<K, V> root;
     protected int size;
 
     /**
@@ -32,7 +31,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
         return root == null;
     }
 
-    public BSTNode<K, V> getRoot() {
+    public BinaryTreeNode<K, V> getRoot() {
         return root;
     }
 
@@ -45,14 +44,15 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param key key of the node. This is used for all comparisons within this tree.
      * @param value value associated with the key.
      */
-    public void insert (K key, V value) {
+    public BinaryTreeNode<K, V> insert (K key, V value) {
         BSTNode<K, V> node = new BSTNode<>(key, value);
         size++;
         if(isEmpty()) {
             root = node;
+            return root;
         }
         else {
-            insert(node, root);
+            return insert(node, root);
         }
     }
 
@@ -65,7 +65,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param node node to be inserted
      * @param subtree root of a subtree to insert the node into.
      */
-    protected void insert(BSTNode<K, V> node, BSTNode<K, V> subtree) {
+    protected BinaryTreeNode<K,V> insert(BinaryTreeNode<K, V> node, BinaryTreeNode<K, V> subtree) {
         if(node.getKey().compareTo(subtree.getKey()) > 0) {
             if(subtree.right == null) {
                 subtree.right = node;
@@ -87,6 +87,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
         else {
             throw new IllegalArgumentException("Tree cannot contain duplicate keys");
         }
+        return node;
     }
 
     /**
@@ -94,7 +95,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param node node to be removed
      * @return the deleted node
      */
-    public BSTNode<K, V> delete(BSTNode<K, V> node) {
+    public BinaryTreeNode<K, V> delete(BinaryTreeNode<K, V> node) {
         if(node == null) {
             return null;
         }
@@ -102,7 +103,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
         // same as node, unless node has 2 children - then node's successor is removed
         // and its data overwrites node's
 
-        BSTNode<K, V> x, y;
+        BinaryTreeNode<K, V> x, y;
         y = (node.left == null || node.right == null) ? node : successor(node);
         x = (y.left != null) ? y.left : y.right;
         if (x != null) {
@@ -130,7 +131,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param key key to look for
      * @return node with the specified key, null if such node cannot be found.
      */
-    public BSTNode<K, V> search(K key) {
+    public BinaryTreeNode<K, V> search(K key) {
         return searchInSubtree(key, this.root);
     }
 
@@ -140,7 +141,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param subtree where to look
      * @return node matching the key or null if such node cannot be found
      */
-    public BSTNode<K, V> searchInSubtree(K key, BSTNode<K, V> subtree) {
+    public BinaryTreeNode<K, V> searchInSubtree(K key, BinaryTreeNode<K, V> subtree) {
         if(this.isEmpty()) {
             return null;
         }
@@ -159,7 +160,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
     /**
      * @return - minimal node of this tree.
      */
-    public BSTNode<K, V> minimum() {
+    public BinaryTreeNode<K, V> minimum() {
         return !isEmpty() ? minimum(root) : null;
     }
 
@@ -168,8 +169,8 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param node root of a subtree to searched through.
      * @return minimal element of a subtree rooted in node.
      */
-    public BSTNode<K, V> minimum(BSTNode<K, V> node) {
-        BSTNode<K, V> current = node;
+    public BinaryTreeNode<K, V> minimum(BinaryTreeNode<K, V> node) {
+        BinaryTreeNode<K, V> current = node;
         while(current.left != null) {
             current = current.left;
         }
@@ -179,7 +180,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
     /**
      * @return - maximal node of this tree.
      */
-    public BSTNode<K, V> maximum() {
+    public BinaryTreeNode<K, V> maximum() {
         return !isEmpty() ? maximum(this.root) : null;
     }
 
@@ -188,8 +189,8 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param node root of a subtree to search through.
      * @return maximal element of a subtree rooted in node.
      */
-    public BSTNode<K, V> maximum(BSTNode<K, V> node) {
-        BSTNode<K, V> current = node;
+    public BinaryTreeNode<K, V> maximum(BinaryTreeNode<K, V> node) {
+        BinaryTreeNode<K, V> current = node;
         while(current.right != null) {
             current = current.right;
         }
@@ -201,11 +202,11 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param node node whose successor is to be found
      * @return node's successor or null if node is the maximal element of the tree.
      */
-    public BSTNode<K,V> successor(BSTNode<K, V> node) {
+    public BinaryTreeNode<K,V> successor(BinaryTreeNode<K, V> node) {
         if(node.right != null) {
             return minimum(node.right);
         }
-        BSTNode<K, V> cur = node.parent;
+        BinaryTreeNode<K, V> cur = node.parent;
         while(cur != null && node == cur.right) {
             node = cur;
             cur = cur.parent;
@@ -218,11 +219,11 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param node starting element
      * @return node's predecessor or null if node is the minimal element of the tree.
      */
-    public BSTNode<K, V> predecessor(BSTNode<K, V> node) {
+    public BinaryTreeNode<K, V> predecessor(BinaryTreeNode<K, V> node) {
         if(node.left != null) {
             return maximum(node.left);
         }
-        BSTNode<K, V> cur = node.parent;
+        BinaryTreeNode<K, V> cur = node.parent;
         while(cur != null && node == cur.left) {
             node = cur;
             cur = cur.parent;
@@ -234,7 +235,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * Perform pre-order traversal of the whole tree, and apply a function at each node.
      * @param function function to call on each node.
      */
-    public void preOrder(Consumer<BSTNode<K, V>> function) {
+    public void preOrder(Consumer<BinaryTreeNode<K, V>> function) {
         preOrder(function, root);
     }
 
@@ -243,7 +244,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @param function - function to call on each node
      * @param node - root of a subtree to traverse
      */
-    private void preOrder(Consumer<BSTNode<K, V>> function, BSTNode<K, V> node) {
+    private void preOrder(Consumer<BinaryTreeNode<K, V>> function, BinaryTreeNode<K, V> node) {
         if(node != null) {
             function.accept(node);
             preOrder(function, node.left);
@@ -251,11 +252,11 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
         }
     }
 
-    public void inOrder(Consumer<BSTNode<K, V>> function) {
+    public void inOrder(Consumer<BinaryTreeNode<K, V>> function) {
         inOrder(function, root);
     }
 
-    protected void inOrder(Consumer<BSTNode<K, V>> function, BSTNode<K, V> node) {
+    protected void inOrder(Consumer<BinaryTreeNode<K, V>> function, BinaryTreeNode<K, V> node) {
         if(node != null) {
             inOrder(function, node.left);
             function.accept(node);
@@ -267,11 +268,11 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * Perform post-order traversal of the whole tree, and apply a function at each node.
      * @param function function to call on each node.
      */
-    public void postOrder(Consumer<BSTNode<K, V>> function) {
+    public void postOrder(Consumer<BinaryTreeNode<K, V>> function) {
         postOrder(function, root);
     }
 
-    public void postOrder(Consumer<BSTNode<K, V>> function, BSTNode<K, V> node) {
+    public void postOrder(Consumer<BinaryTreeNode<K, V>> function, BinaryTreeNode<K, V> node) {
         if(node != null) {
             postOrder(function, node.right);
             postOrder(function, node.left);
@@ -282,9 +283,9 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
     /**
      * @return list of tree nodes, sorted by keys
      */
-    public List<BSTNode<K,V>> toList() {
-        List<BSTNode<K, V>> list = new ArrayList<>(size);
-        for(BSTNode<K, V> node : this) {
+    public List<BinaryTreeNode<K,V>> toList() {
+        List<BinaryTreeNode<K, V>> list = new ArrayList<>(size);
+        for(BinaryTreeNode<K, V> node : this) {
             list.add(node);
         }
         return list;
@@ -307,9 +308,9 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
      * @return an iterator that performs in-order traversal of the tree.
      */
     @Override
-    public Iterator<BSTNode<K, V>> iterator() {
-        return new Iterator<BSTNode<K, V>>() {
-            private BSTNode<K, V> currentNode;
+    public Iterator<BinaryTreeNode<K, V>> iterator() {
+        return new Iterator<BinaryTreeNode<K, V>>() {
+            private BinaryTreeNode<K, V> currentNode;
             private int index = 0;  // to avoid looking for successor in each hasNext() call
             @Override
             public boolean hasNext() {
@@ -317,7 +318,7 @@ public class BST<K extends Comparable<K>, V> implements Iterable<BSTNode<K,V>> {
             }
 
             @Override
-            public BSTNode<K, V> next() {
+            public BinaryTreeNode<K, V> next() {
                 index++;
                 if(currentNode == null) {
                     currentNode = minimum();

@@ -1,22 +1,26 @@
-package reshi.ppt.algorytmy.augmented;
+package reshi.ppt.algorytmy.BST.ranked;
 
-import reshi.ppt.algorytmy.BST.BSTNode;
+import reshi.ppt.algorytmy.BST.BinaryTreeNode;
 
 /**
  * @author Marcin
  * @date 2016-05-01
  */
-public class RankedNode<Key extends Comparable<Key>, Value> extends BSTNode<Key, Value> {
+public class RankedNode<Key extends Comparable<Key>, Value> extends BinaryTreeNode<Key, Value> {
     /**
      * Size of subtree rooted in this node.
      * Satisfies x.size == x.left.size + x.right.size + 1
      * [null].size = 0.
      */
-    public int size;
+    private int size;
+
+    public int getSize() {
+        return size;
+    }
 
     public RankedNode(Key key, Value value) {
         super(key, value);
-        size = 1;
+        size = 0;
     }
 
     public void elementAdded() {
@@ -45,6 +49,7 @@ public class RankedNode<Key extends Comparable<Key>, Value> extends BSTNode<Key,
     public RankedNode<Key, Value> getParent() {
         return (RankedNode<Key, Value>) parent;
     }
+
     @Override
     public String toString() {
         return "{" + key + ": " + value.toString() + ", size: " + size +"}";
