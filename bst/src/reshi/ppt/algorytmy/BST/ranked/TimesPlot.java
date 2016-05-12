@@ -1,3 +1,4 @@
+/*
 package reshi.ppt.algorytmy.BST.ranked;
 
 import org.jfree.chart.ChartFactory;
@@ -20,9 +21,11 @@ import org.jfree.ui.GradientPaintTransformer;
 import java.awt.*;
 import java.util.List;
 
+*/
 /**
  * @author Marcin Regulski on 09.05.2016.
- */
+ *//*
+
 public class TimesPlot extends ApplicationFrame {
     XYDataset dataset;
 
@@ -70,3 +73,4 @@ public class TimesPlot extends ApplicationFrame {
     }
 
 }
+*/

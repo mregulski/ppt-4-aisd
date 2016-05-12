@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="common">
+    <CLASSES>
+      <root url="jar://D:/lib/reshi/common.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../common/src" />
+    </SOURCES>
+  </library>
+</component>

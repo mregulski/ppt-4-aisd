@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import reshi.common.BasicLogger;
+import reshi.common.TimesPlot;
 import reshi.ppt.algorytmy.BST.BST;
 
 import java.time.Duration;
@@ -19,7 +20,7 @@ import java.util.stream.LongStream;
 public class TimesTest extends Application {
     private BasicLogger logger = new BasicLogger(System.out);
     private int maxDataSize = 10000;
-    private int testsPerAverage = 1000;
+    private int testsPerAverage = 100;
     private int step = 500;
 
     @Override
@@ -41,7 +42,7 @@ public class TimesTest extends Application {
                 .boxed()
                 .map((x)->x*step)
                 .collect(Collectors.toList());
-        TimesPlotFx plot = new TimesPlotFx();
+        TimesPlot plot = new TimesPlot();
         results.forEach((key, v) -> plot.addSeries(key, xRange, results.get(key)));
 
         Scene scene = new Scene(plot.getChart(), 800, 600);

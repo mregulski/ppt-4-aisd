@@ -1,2 +1,4 @@
-**/bin/*
-**/stat/*
+**/bin/**/stat/*
+out/
+bin/
+__pychache__/
