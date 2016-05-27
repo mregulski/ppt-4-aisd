@@ -16,7 +16,7 @@ public class MinQueueTest {
     public void insert() {
         Integer[] data = {3,6,7,2,5,3,10,16,8,20,15};
         List<Integer> nums = Arrays.asList(data);
-        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.<Integer>naturalOrder());
+        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.naturalOrder());
         System.out.println(q.getHeap());
         assertMinHeapProperty(q);
     }
@@ -25,7 +25,7 @@ public class MinQueueTest {
     public void pop_insert() {
         Integer[] data = {3,6,7,2,5,3,10,16,8,20,15};
         List<Integer> nums = Arrays.asList(data);
-        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.<Integer>naturalOrder());
+        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.naturalOrder());
         q.pop();
         q.insert(9);
         assertMinHeapProperty(q);
@@ -38,7 +38,7 @@ public class MinQueueTest {
         ArrayList<String> list = new ArrayList<>(Arrays.asList(data));
         String special = "SUPERSPECIAL";
         list.add(special);
-        MinQueue<String> q = new MinQueue<String>(list, (s1,s2)->len(s1)-len(s2));
+        MinQueue<String> q = new MinQueue<>(list, (s1,s2)->len(s1)-len(s2));
         specialLen = 1;
         q.decreaseKey(special);
         System.out.println(q.getHeap());
@@ -59,7 +59,7 @@ public class MinQueueTest {
     public void popOrder() {
         Integer[] data = {3,6,7,2,5,3,10,16,8,20,15};
         List<Integer> nums = Arrays.asList(data);
-        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.<Integer>naturalOrder());
+        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.naturalOrder());
         List<Integer> pops = new ArrayList<>();
         while(!q.isEmpty()) {
             pops.add(q.pop());
@@ -71,7 +71,7 @@ public class MinQueueTest {
     public void pop() {
         Integer[] data = {20,5,10,12,3,6};
         List<Integer> nums = Arrays.asList(data);
-        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.<Integer>naturalOrder());
+        MinQueue<Integer> q = new MinQueue<>(nums, Comparator.naturalOrder());
         Integer x = q.pop();
         assertMinHeapProperty(q);
 

@@ -27,16 +27,12 @@ public class MSTFactory {
     }
 
     public MST createKruskal() {
-        Map<Vertex, Double> cost = new HashMap<>(vertices.size());
-        vertices.forEach((v) -> {
-            cost.put(v, Double.POSITIVE_INFINITY);
-        });
         Set<UndirectedWeightedEdge> mst = new HashSet<>(edges.size());
         DisjointSet<Vertex> reachable = new DisjointSet<>(vertices);
 
         Comparator<UndirectedWeightedEdge> edgeComparator = (e, f) -> Double.compare(e.getWeight(), f.getWeight());
 
-        MinQueue<UndirectedWeightedEdge> queue = new MinQueue<UndirectedWeightedEdge>(edges, edgeComparator);
+        MinQueue<UndirectedWeightedEdge> queue = new MinQueue<>(edges, edgeComparator);
 
         while(!queue.isEmpty()) {
             UndirectedWeightedEdge e = queue.pop();

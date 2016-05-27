@@ -23,7 +23,7 @@ public class UndirectedPath {
         this.source = source;
         this.target = target;
         this.path = path;
-        weight = path.stream().map(WeightedEdge::getWeight).reduce((w1,w2) -> w1+w2).get();
+        weight = path.stream().map(WeightedEdge::getWeight).reduce((w1,w2) -> w1+w2).orElse(0.0);
     }
 
 
